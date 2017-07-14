@@ -1,0 +1,41 @@
+@model FutbolAmerykanski.Models.Zawodnik
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Zawodnik</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <input type="hidden" asp-for="IdZawodnik" />
+        <dt>
+            @Html.DisplayNameFor(model => model.Imie)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Imie)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwisko)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nazwisko)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LigaDateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LigaDateTime)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
+</div>

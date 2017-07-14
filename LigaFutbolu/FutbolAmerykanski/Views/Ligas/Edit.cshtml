@@ -1,0 +1,50 @@
+@model FutbolAmerykanski.Models.Liga
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>Liga</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="LigaId" />
+        <div class="form-group">
+            <label asp-for="IdZawodnik" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="IdZawodnik" class="form-control" asp-items="ViewBag.IdZawodnik"></select>
+                <span asp-validation-for="IdZawodnik" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="IdDruzyny" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="IdDruzyny" class="form-control" asp-items="ViewBag.IdDruzyny"></select>
+                <span asp-validation-for="IdDruzyny" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Grade" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Grade" class="form-control" />
+                <span asp-validation-for="Grade" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

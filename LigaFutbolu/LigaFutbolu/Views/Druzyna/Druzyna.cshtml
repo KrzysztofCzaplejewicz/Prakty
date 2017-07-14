@@ -1,0 +1,16 @@
+﻿@model IEnumerable <LigaFutbolu.Models.DruzynyModel>
+@{
+    ViewBag.Title = "Druzyna";
+}
+
+<h2>Drużyna: </h2>
+
+<p>
+    Select from @Model.Count() Drużyny:
+</p>
+<ul>
+    @foreach (var DruzynyModel in Model)
+    {
+        <li><a href="/Druzyna/Druzyna?druzyna=@DruzynyModel.Imie">@DruzynyModel.Imie</a></li>
+    }
+</ul>
