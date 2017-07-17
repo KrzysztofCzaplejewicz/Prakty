@@ -1,0 +1,111 @@
+﻿@model IEnumerable<MVC.Models.Player>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>API</title>
+    <style>
+      .panel .panel-heading .panel-title {
+          text-decoration: none;
+      }  
+
+      .pdsa-panel-toggle {
+          float: right;
+      }
+    </style>
+
+</head>
+<body>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+<div class="container">
+    <div class="body-content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel-group" id="playlists"
+                     data-pdsa-collapser-name="playlist">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">
+                                <a href="#mylowlanders"
+                                   data-toggle="collapse"
+                                   data-parent="#playlists">Lowlanders</a>
+                                <a href="#mylowlanders"
+                                   data-toggle="collapse"
+                                   data-parent="#playlists"
+                                   class="pdsa-panel-toggle"></a>
+                            </h1>
+                        </div>
+                        <div id="mylowlanders" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <h2>Lowlanders</h2>
+                                <p>TO NAJLEPSZA DRUZYNA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">
+                            <a href="#myPanters"
+                               data-toggle="collapse"
+                               data-parent="#playlists">Panters</a>
+                            <a href="#myPanters"
+                               data-toggle="collapse"
+                               data-parent="#playlists"
+                               class="pdsa-panel-toggle"></a>
+                        </h1>
+                    </div>
+                    <div id="myPanters" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <h2>Panters</h2>
+                            <p>TO CHUJE</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#playlists .pdsa-panel-toggle")
+            .addClass("glyphicon glyphicon-plus");
+
+        var list = $("#playlists .in");
+        for (var i = 0; i < list.length; i++) {
+            $("a[href='#" + $(list[i]).attr("id") + "']")
+                .next(".pdsa-panel-toggle")
+                .removeClass("glyphicon-plus")
+                .addClass("glyphicon-minus");
+        }
+
+        $("#playlists").on('hide.bs.collapse',
+            function(e) {
+                $("#" + e.target.id).prev()
+                    .find(".pdsa-panel-toggle")
+                    .remove("glyphicon-minus")
+                    .addClass("glyphicon-plus");
+            });
+        {
+    }});
+</script>
+</body>
+</html>

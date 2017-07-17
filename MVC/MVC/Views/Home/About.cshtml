@@ -4,4 +4,81 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<html ng-app="ionicApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Ionic Accordion</title>
+   
+    <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+    <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+
+</head>
+
+<body ng-controller="MyCtrl">
+    
+<ion-header-bar class="bar-positive">
+    <h1 class="title">Accordion List</h1>
+</ion-header-bar>
+
+<ion-content>
+
+    <ion-list>
+        <div ng-repeat="group in groups">
+            <ion-item class="item-stable"
+                      ng-click="toggleGroup(group)"
+                      ng-class="{active: isGroupShown(group)}">
+                <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+                &nbsp;
+                Group {{group.name}}
+            </ion-item>
+            <ion-item class="item-accordion"
+                      ng-repeat="item in group.items"
+                      ng-show="isGroupShown(group)">
+                {{item}}
+            </ion-item>
+        </div>
+    </ion-list>
+
+</ion-content>
+      
+</body>
+</html>
+
+
+<script>
+    //ACCORDINGLIST
+    angular.module('ionicApp', ['ionic'])
+
+        .controller('MyCtrl', function ($scope) {
+            $scope.group = [];
+            for (var player = 0; player < 10; player++) {
+                $scope.groups[player] = {
+                    name: player,
+                    items: []
+                };
+                for (var j = 0; j < 3; j++) {
+                    $scope.groups[player].items.push(player + '-' + j);
+                }
+            }
+
+            /*
+            * if given group is the selected group, deselect it
+            * else, select the given group
+            */
+            $scope.toggleGroup = function (group) {
+                if ($scope.isGroupShown(group)) {
+                    $scope.shownGroup = null;
+                } else {
+                    $scope.shownGroup = group;
+                }
+            };
+            $scope.isGroupShown = function (group) {
+                return $scope.shownGroup === group;
+            };
+
+        });
+
+</script>
+ 
+

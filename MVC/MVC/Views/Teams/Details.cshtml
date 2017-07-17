@@ -1,6 +1,9 @@
-﻿@model MVC.Models.Team
+﻿@using Microsoft.Ajax.Utilities
+@using MVC.Models
+@model MVC.Models.Team
 
 @{
+    ViewBag.Title = "Team - " + Model.Town + Model.Players;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,17 +16,9 @@
 </head>
 <body>
     <div>
-        <h4>Team</h4>
+        <h2>@Html.DisplayFor(model=> model.TeamName)</h2>
         <hr />
         <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.TeamName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TeamName)
-            </dd>
-    
             <dt>
                 @Html.DisplayNameFor(model => model.Town)
             </dt>
@@ -32,11 +27,24 @@
                 @Html.DisplayFor(model => model.Town)
             </dd>
     
+            <dt>
+                @Html.DisplayNameFor(model => model.TeamCode)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TeamCode)
+            </dd>
+    
         </dl>
     </div>
     <p>
+    <p class="button">
+        @Html.ActionLink("Add to cart", "AddToCart",
+            "TeamCart", new { id = Model.Id }, "") |
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
+</p>
+
 </body>
 </html>

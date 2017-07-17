@@ -8,23 +8,27 @@
 
 <html>
 <head>
+   
+   
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    
 </head>
 <body>
+    
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TeamName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Town)
-            </th>
-            <th></th>
-        </tr>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TeamName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Town)
+        </th>
+        <th></th>
+    </tr>
     
     @foreach (var item in Model) {
         <tr>
@@ -42,6 +46,39 @@
         </tr>
     }
     
-    </table>
+</table>
+    
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#ToolsID">Tools</a>
+            </h4>
+        </div>
+        <div class="panel-collapse collapse" id="ToolsID">
+            <div class="list-group">
+                <a asp-controller="MyController1" asp-action="MyAction1" class="list-group-item">Controller1 Test</a>
+                <a asp-controller="MyController2" asp-action="MyAction2" class="list-group-item">Controller2 Test</a>
+            </div>
+        </div>
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#ReportsID">Teams</a>
+            </h4>
+        </div>
+        <div class="panel-collapse collapse accordion-toggle" id="ReportsID">
+            <div class="list-group">
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        <li><a>@item.TeamName</a></li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

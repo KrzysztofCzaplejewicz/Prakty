@@ -1,24 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using MVC.Data;
+using MVC.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using MVC.Data;
-using MVC.Models;
 
 namespace MVC.Controllers
 {
     public class PlayersController : Controller
     {
-        private Context db = new Context();
+        private Context _db = new Context();
 
         // GET: Players
         public ActionResult Index()
         {
-            var players = db.Players.Include(p => p.League).Include(p => p.Team);
+            var players = _db.Players.Include(p => p.League).Include(p => p.Team);
+            return View(players.ToList());
+        }
+        public ActionResult Api()
+        {
+            var players = _db.Players.Include(p => p.League).Include(p => p.Team);
             return View(players.ToList());
         }
 
@@ -29,7 +30,7 @@ namespace MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Player player = db.Players.Find(id);
+            Player player = _db.Players.Find(id);
             if (player == null)
             {
                 return HttpNotFound();
@@ -38,29 +39,32 @@ namespace MVC.Controllers
         }
 
         // GET: Players/Create
+
+        [Authorize]
         public ActionResult Create()
         {
-            ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "LeaugeName");
-            ViewBag.TeamId = new SelectList(db.Teams, "Id", "TeamName");
+            ViewBag.LeagueId = new SelectList(_db.Leagues, "Id", "LeaugeName");
+            ViewBag.TeamId = new SelectList(_db.Teams, "Id", "TeamName");
             return View();
         }
 
         // POST: Players/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Age,TeamId,LeagueId")] Player player)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Players.Add(player);
-                db.SaveChanges();
+                _db.Players.Add(player);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "LeaugeName", player.LeagueId);
-            ViewBag.TeamId = new SelectList(db.Teams, "Id", "TeamName", player.TeamId);
+            ViewBag.LeagueId = new SelectList(_db.Leagues, "Id", "LeaugeName", player.LeagueId);
+            ViewBag.TeamId = new SelectList(_db.Teams, "Id", "TeamName", player.TeamId);
             return View(player);
         }
 
@@ -71,13 +75,13 @@ namespace MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Player player = db.Players.Find(id);
+            Player player = _db.Players.Find(id);
             if (player == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "LeaugeName", player.LeagueId);
-            ViewBag.TeamId = new SelectList(db.Teams, "Id", "TeamName", player.TeamId);
+            ViewBag.LeagueId = new SelectList(_db.Leagues, "Id", "LeaugeName", player.LeagueId);
+            ViewBag.TeamId = new SelectList(_db.Teams, "Id", "TeamName", player.TeamId);
             return View(player);
         }
 
@@ -90,12 +94,12 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(player).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(player).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.LeagueId = new SelectList(db.Leagues, "Id", "LeaugeName", player.LeagueId);
-            ViewBag.TeamId = new SelectList(db.Teams, "Id", "TeamName", player.TeamId);
+            ViewBag.LeagueId = new SelectList(_db.Leagues, "Id", "LeaugeName", player.LeagueId);
+            ViewBag.TeamId = new SelectList(_db.Teams, "Id", "TeamName", player.TeamId);
             return View(player);
         }
 
@@ -106,7 +110,7 @@ namespace MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Player player = db.Players.Find(id);
+            Player player = _db.Players.Find(id);
             if (player == null)
             {
                 return HttpNotFound();
@@ -119,9 +123,9 @@ namespace MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Player player = db.Players.Find(id);
-            db.Players.Remove(player);
-            db.SaveChanges();
+            Player player = _db.Players.Find(id);
+            _db.Players.Remove(player);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 

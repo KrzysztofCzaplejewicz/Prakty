@@ -1,0 +1,6 @@
+﻿@model MVC.Models.TeamCart
+@Html.ActionLink("Cart ("+ ViewData["CartCount"]+")",
+    "Index",
+    "TeamCart",
+    new {id= "cart-status"})
+@*@Html.RenderAction("CartSummary", "TeamCart")*@

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MVC.Models;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Web;
-using MVC.Models;
 
 namespace MVC.Data
 {
@@ -15,5 +10,8 @@ namespace MVC.Data
         public DbSet<Player> Players { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<League> Leagues { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }
