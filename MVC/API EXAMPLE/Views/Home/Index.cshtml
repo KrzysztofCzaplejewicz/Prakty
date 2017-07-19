@@ -1,0 +1,301 @@
+﻿
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="../../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>API</h2>
+                
+                <button class="btn btn-default"
+                        onclick="playerGet(this);"
+                        type="button"
+                        data-id='"+player.Id+"'>
+                    <span class="glyphicon glyphicon-edit"></span>
+                </button>
+                <table id="Players"
+                       class="table table-boardered table-condensed table-striped">
+                    
+
+                    <thead>
+                    
+                    <tr>
+                        <th>Edit</th>
+                        <th>Id</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Age</th>
+                        <th>Delete</th>
+
+
+
+
+
+
+                    </tr>
+
+                    </thead>
+
+                </table>
+                <button class="btn btn-default"
+                        onclick="playerDelete(this);"
+                        type="button"
+                        data-id='"+player.Id+"'>
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+                <button class="btn btn-primary"
+                        type="button" id="addButton"
+                        onclick="addClick()">
+                    Add Player
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Information
+                    </div>
+
+
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="FirstName">FirstName</label>
+                            <input class="form-control" type="text" id="FirstName" />
+                        </div>
+                    </div>
+
+
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="LastName">LastName</label>
+                            <input class="form-control" type="text" id="LastName" />
+                        </div>
+                    </div>
+
+
+
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="Age">Age</label>
+                            <input class="form-control" type="text" id="Age" />
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="id" value="0" />
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" id="updateButton"
+                        class="btn btn-primary"
+                        onclick="updateClick();">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+@section scripts
+{
+
+
+    <script>
+        function updateClick() {
+            
+            Player = new Object();
+            Player.FirstName = $("#FirstName").val();
+            Player.LastName =$("#LastName").val();
+            Player.Age = $("#Age").val();
+            if ($("#updateButton").text().trim() == "Add") {
+                playerAdd(Player);
+            }
+
+            else {
+                playerUpdate(Player);
+            }
+        }
+
+        function addClick() {
+            formClear();
+
+        }
+
+
+        function List() {
+            $.ajax({
+                url: '/api/Players',
+                type: 'GET',
+                dataType: 'json',
+                success: function (players) {
+                    playerListSuccess(players);
+
+                },
+                error: function (request, message, error) {
+                    handleException(request, message, error);
+                }
+            });
+        }
+
+        function playerListSuccess(players) {
+            $.each(players,
+                function (index, players) {
+                    playerAddRow(players);
+                });
+        }
+
+        function playerAddRow(players) {
+            if ($("#playerTable tbody").length == 0) {
+                $("#playerTable").append("<tbody></tbody>");
+            }
+            $("#playerTable tbody").append(playerBuildTableRow(players));
+
+        }
+
+        function playerBuildTableRow(player) {
+            var ret =
+
+                "<tr>" +
+                    "<td>" +
+                    "<button type='button' " +
+                    "onclick='productGet(this);' " +
+                    "class='btn btn-default' " +
+                    "data-id='" + player.Id + "'>" +
+                    "<span class='glyphicon glyphicon-edit' />"
+                    + "</button>" +
+                    "</td >" +
+                "<td>" + player.FirstName + "</td>" +
+                "<td>" + player.LastName + "</td>"
+                + "<td>" + player.Age + "</td>" +
+                    "<td>" +
+                    "<button type='button' " +
+                    "onclick='playerDelete(this);' " +
+                    "class='btn btn-default' " +
+                    "data-id='" + player.Id + "'>" +
+                    "<span class='glyphicon glyphicon-remove' />" +
+                    "</button>" +
+                    "</td>" +
+
+                "</tr>";
+            return ret;
+
+        }
+        function handleException(request, message, error) {
+            var msg = "";
+            msg += "Code: " + request.status + "\n";
+            msg += "Text: " + request.statusText + "\n";
+            if (request.responseJSON != null) {
+                msg += "Message" +
+                    request.responseJSON.Message + "\n";
+            }
+            alert(msg);
+
+        }
+
+        function productToFields(player) {
+            $("#FirstName").val(player.FirstName);
+            $("#LastName").val(player.LastName);
+            $("#Age").val(player.Age);
+        }
+
+        var Player = {
+            Id: 0,
+            FirstName: "",
+            LastName: "",
+            Age: ""
+        }
+
+        function playerAdd(player) {
+            $.ajax({
+                url: "/api/Players",
+                type: 'POST',
+                contentType:
+                    "application/json;charset=utf-8",
+                data: JSON.stringify(player),
+                success: function (player) {
+                    playerAddSuccess(player);
+                },
+                error: function (request, message, error) {
+                    handleException(request, message, error);
+                }
+            });
+        }
+
+        function playerAddSuccess(player) {
+            playerAddRow(player);
+            formClear();
+        }
+
+        function formClear() {
+            $("#FirstName").val("");
+            $("#LastName").val("");
+            $("#Age").val("");
+        }
+
+        function playerUpdate(player) {
+            $.ajax({
+                url: "/api/Players",
+                type: 'PUT',
+                contentType:
+                    "application/json;charset=utf-8",
+                data: JSON.stringify(player),
+                success: function (player) {
+                    playerUpdateSuccess(player);
+                },
+                error: function (request, message, error) {
+                    handleException(request, message, error);
+                }
+            });
+        }
+
+        function playerUpdateSuccess(player) {
+            playerUpdateInTable(player);
+        }
+
+
+        function playerUpdateInTable(player) {
+         
+            var row = $("#playerTable button[data-id='" +
+                player.Id + "']").parents("tr")[0];
+       
+            $(row).after(playerBuildTableRow(Player));
+         
+            $(row).remove();
+            formClear(); 
+      
+            $("#updateButton").text("Add");
+        }
+
+        function playerDelete(ctl) {
+            var id = $(ctl).data("id");
+            
+            $.ajax({
+                url: "/api/Players/" + id,
+                type: 'DELETE',
+                success: function (player) {
+                    $(ctl).parents("tr").remove();
+                },
+                error: function (request, message, error) {
+                    handleException(request, message, error);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            List();
+        });
+
+    </script>
+
+   
+}

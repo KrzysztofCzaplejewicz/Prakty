@@ -1,0 +1,58 @@
+﻿@model MVC_API.ViewModels.PlayerViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+<div align="center"
+     width="500px">
+@using (Html.BeginForm("Edit", "Player", FormMethod.Post))
+{
+    <table class="table"
+           width="400px"
+           cellpadding="20">
+
+        <tr class="btn-default">
+            <td>
+                @Html.LabelFor(model=>model.Player.FirstName)
+            </td>
+            <td>
+                @Html.TextBoxFor(model=>model.Player.FirstName)
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(model=>model.Player.LastName)
+            </td>
+            <td>
+                @Html.TextBoxFor(model=>model.Player.LastName)
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(model=>model.Player.Age)
+            </td>
+            <td>
+                @Html.TextBoxFor(model=>model.Player.Age)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                    
+            </td>
+            <td>
+                <input type="submit" value="Save"/> &nbsp;<a class="btn-primary" href="@Url.Action("Index","Player")">Back</a>
+                @Html.HiddenFor(model=>model.Player.Id)
+            </td>
+        </tr>
+
+    </table>
+}
+
+</div>
+
+
+

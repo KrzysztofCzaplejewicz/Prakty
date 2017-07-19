@@ -1,0 +1,53 @@
+﻿@model MVC_API.ViewModels.PlayerViewModel
+@{
+    ViewBag.Title = "Create";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+<div align="center">
+    @using (Html.BeginForm("create", "Player", FormMethod.Post))
+    {
+        <table class="table">
+            
+            <tr>
+                <td>
+                    @Html.LabelFor(model=>model.Player.FirstName)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model=>model.Player.FirstName)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(model=>model.Player.LastName)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model=>model.Player.LastName)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(model=>model.Player.Age)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model=>model.Player.Age)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    
+                </td>
+                <td>
+                    <input type="submit" value="Save"/>
+                </td>
+            </tr>
+
+        </table>
+
+    }
+
+</div>
+

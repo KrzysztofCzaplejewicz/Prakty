@@ -1,0 +1,39 @@
+﻿@using MVC_API.Models
+
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div align="center">
+    <a href="@Url.Action("Create", "Player")">Create New Player</a>
+    <br/><br/>
+    <table cellpadding="2" class="table" cellspacing="2" border="1">
+        <tr class="btn-primary">
+            <th>PlayerId</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Age</th>
+        </tr>
+        @foreach (var play in ViewBag.listPlayers)
+        {
+            <tr class="btn-success">
+                <td>@play.</td>
+                <td>@play.FirstName</td>
+                <td>@play.LastName</td>
+                <td>@play.Age</td>
+                <td>
+                    <a onclick="return Confirm('Do you want toDelete it kurwa?')" href="@Url.Action("Delete","Player", new{id=play.Id})">Delete</a>
+                    ||
+                    <a href="@Url.Action("Edit", "Player", new{id=play.Id})">Edit</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    
+
+</div>

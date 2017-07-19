@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="../../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>API</h2>
+            
+            <table id="Players"
+                   class="table table-boardered table-condensed table-striped">
+                <thead>
+                <tr>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Age</th>
+                </tr>
+                </thead>
+
+            </table>
+            <button class="btn btn-primary"
+                    type="button" id="addButton"
+                    onclick="addClick()">Add Player</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Information
+                </div>
+                
+
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="FirstName">FirstName</label>
+                        <input class="form-control" type="text" id="FirstName"/>
+                    </div>
+                </div>
+
+
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="LastName">LastName</label>
+                        <input class="form-control" type="text" id="LastName"/>
+                    </div>
+                </div>
+                
+                
+
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="Age">Age</label>
+                        <input class="form-control" type="text" id="Age"/>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-xs-12">
+            <button type="button" id="updateButton"
+                    class="btn btn-primary"
+                    onclick="updateClick();">
+                Add
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
