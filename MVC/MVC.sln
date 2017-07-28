@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC.Tests", "MVC.Tests\MVC.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API EXAMPLE", "API EXAMPLE\API EXAMPLE.csproj", "{4466C0B0-E2DE-4AC2-92F2-AF8933774DCD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrations", "Migrations\Migrations.csproj", "{437BBF48-507C-4E4F-B26C-01A206854ACD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub", "GameHub\GameHub.csproj", "{5231BF2C-3F05-41C9-BDB3-095BB1E4C3D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{4466C0B0-E2DE-4AC2-92F2-AF8933774DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4466C0B0-E2DE-4AC2-92F2-AF8933774DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4466C0B0-E2DE-4AC2-92F2-AF8933774DCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{437BBF48-507C-4E4F-B26C-01A206854ACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{437BBF48-507C-4E4F-B26C-01A206854ACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{437BBF48-507C-4E4F-B26C-01A206854ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{437BBF48-507C-4E4F-B26C-01A206854ACD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5231BF2C-3F05-41C9-BDB3-095BB1E4C3D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5231BF2C-3F05-41C9-BDB3-095BB1E4C3D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5231BF2C-3F05-41C9-BDB3-095BB1E4C3D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5231BF2C-3F05-41C9-BDB3-095BB1E4C3D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

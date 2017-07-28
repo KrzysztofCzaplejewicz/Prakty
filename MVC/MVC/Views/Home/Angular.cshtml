@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app>
+<head>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Angular</title>
+</head>
+<body ng-controller="MainController">
+
+<h1>{{message}}</h1>
+<div>
+</div>
+
+
+</body>
+
+</html>
+<script>
+
+    var MainController= function($scope) {
+        $scope.message = "hellow angular";
+    }
+
+</script>
+
+

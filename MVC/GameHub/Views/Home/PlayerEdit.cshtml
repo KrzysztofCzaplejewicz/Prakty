@@ -1,0 +1,41 @@
+﻿@model GameHub.ViewModels.PlayersViewModel
+
+<h3>{{title}}</h3>
+    <hr />
+<form role="form" style="max-width: 500px;">
+    <strong class="error">{{error}}</strong>
+    <div class="form-group">
+        <label for="FirstName">
+            First Name:
+        </label>
+        <input type="text" class="form-control" id="FirstName" ng-model="FirstName" />
+    </div>
+
+    <div class="form-group">
+        <label for="LastName">
+            Last Name:
+        </label>
+        <input type="text" class="form-control" id="LastName" ng-model="LastName" />
+    </div>
+    
+    <div class="form-group">
+        <label for="Age">
+            Age:
+        </label>
+        <input type="text" class="form-control" id="Age" ng-model="Age" />
+    </div>
+
+    <div class="form-group">
+        <label for="TeamId">
+            TeamId:
+        </label>
+        <select class="form-control" id="TeamId" ng-model="TeamId" ng-options="c.Id as c.TeamName for c in Id">
+            <option value="">-- Select Team--</option>
+        </select>
+    </div>
+    <a href="#!/playerlist" class="btn btn-info">Back to List</a>
+    <button type="submit" class="btn btn-default" ng-click="savePlayer()">Submit</button>
+</form>
+
+
+

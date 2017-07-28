@@ -1,0 +1,41 @@
+﻿   <h3>
+    Are you sure to delete this record?
+</h3>
+<hr />
+<div class="container" >
+    <form  class="form-horizontal" style="max-width: 500px;">
+        <div class="form-group">
+            <label class="control-label col-xs-3">
+                TeamName:
+            </label>
+            <div class="col-xs-9">
+                <p class="form-control-static">{{TeamName}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-3">
+                Town:
+            </label>
+            <div class="col-xs-9">
+                <p class="form-control-static">{{Town}}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-xs-3">
+                League:
+            </label>
+            <div class="col-xs-9">
+                <p class="form-control-static">{{LeagueId}}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-xs-offset-3 col-xs-9 text-center">
+                <a class="btn btn-info" href="#!/list">Back to List</a>
+                <button type="submit" class="btn btn-primary" ng-click="delete()">Delete</button>
+            </div>
+        </div>
+
+    </form>
+</div>
