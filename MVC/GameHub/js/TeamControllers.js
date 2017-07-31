@@ -51,20 +51,21 @@
             // ten controller odpowiada za pokazanie odpowiedniej druzynyu w Edit.cshtml 
             //i ma opcje dodawania oraz edytowania i zapisania druzyny w db
     TeamControllers.controller('EditController',
-                [
-                    '$scope', '$http', '$routeParams', '$location',
-                    function ($scope, $http, $routeParams, $location) {
+        [
+            '$scope', '$http', '$routeParams', '$location', 
+                    function ($scope, $http, $routeParams, $location ) {
                      $http.get("/api/Leagues").then(function(data) {
                             $scope.Id = data.data;
                         });
                         
                         $scope.save = function () {
-                            
+
                             var obj = {
                                 TeamName: $scope.TeamName,
                                 Town: $scope.Town,
-                                LeagueId: $scope.LeagueId
-                            };
+                                LeagueId: $scope.LeagueId,
+                                UrlIcon: $scope.UrlIcon
+                        };
                             if ($scope.Id === 0) {
                                 $http.post("/api/Teams/", obj).then(function() {
                                     $location.path("/list");
@@ -89,7 +90,8 @@
                                 $scope.TeamName = data.data.TeamName;
                                 $scope.Town = data.data.Town;
                                 $scope.LeagueId = data.data.LeagueId;
-                                
+                                $scope.UrlIcon = data.data.UrlIcon;
+
                             });
                         } else {
                             $scope.title = "Create New Team";

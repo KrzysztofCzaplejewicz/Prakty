@@ -32,6 +32,7 @@ namespace GameHub.Controllers
                     TeamName = x.TeamName,
                     Town = x.Town,
                     Id = x.Id,
+                    UrlIcon = x.UrlIcon,
                     LeagueId = x.LeagueId,
                     LeagueName = x.Leagues.LeagueName
                 });
@@ -54,6 +55,7 @@ namespace GameHub.Controllers
                 viewModel.TeamName = team.TeamName;
                 viewModel.Town = team.Town;
                 viewModel.LeagueId = team.LeagueId;
+                viewModel.UrlIcon = team.UrlIcon;
 
 
                 return viewModel;

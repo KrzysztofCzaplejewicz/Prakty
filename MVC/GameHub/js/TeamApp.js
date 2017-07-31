@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
     
-    var TeamApp = angular.module('TeamApp', ["ngRoute", "TeamControllers"]);
+    var TeamApp = angular.module("TeamApp", ["ngRoute", "TeamControllers" ]);
    TeamApp.config([
        "$routeProvider", "$locationProvider", function ($routeProvider) {
             $routeProvider
@@ -72,4 +72,26 @@
            
        }
     ]);
+
+    //TeamApp.controller('AppCtrl',
+    //    function($scope, $mdDialog) {
+    //        $scope.status = ' ';
+    //        $scope.customFullscreen = false;
+    //        $scope.showAdvanced = function(ev) {
+    //            $mdDialog.show({
+    //                    controller: EditController,
+    //                    templateUrl: '/home/edit',
+    //                    parent: angular.element(document.body),
+    //                    targetEvent: ev,
+    //                    clickOutsideToClose: true,
+    //                    fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+    //                })
+    //                .then(function(answer) {
+    //                        $scope.status = 'You said the information was "' + answer + '".';
+    //                    },
+    //                    function() {
+    //                        $scope.status = 'You cancelled the dialog.';
+    //                    });
+    //        };
+    //    });
 })();

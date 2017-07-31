@@ -1,10 +1,16 @@
 ﻿@{  
-    Layout = null;  
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }  
   
 <!DOCTYPE html>  
 <html ng-app="TeamApp">  
 <head>  
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
     <meta name="viewport" content="width=device-width" />  
     <title>Index</title>  
   
@@ -14,7 +20,9 @@
     <script src="@Url.Content("~/js/TeamApp.js")" type="text/javascript"></script>  
     <script src="@Url.Content("~/js/TeamControllers.js")"type="text/javascript"></script>  
 </head>  
-<body>  
-<div class="container" ng-view></div>  
+<body>
+
+
+<div class = "container" ng-view ></div>
 </body>  
 </html>  

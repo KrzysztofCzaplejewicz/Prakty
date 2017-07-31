@@ -20,6 +20,8 @@ namespace GameHub.Models
         public string Town { get; set; }
         
         public int? LeagueId { get; set; }
+
+        public string UrlIcon { get; set; }
         
         public virtual Leagues Leagues { get; set; }
         

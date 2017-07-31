@@ -259,6 +259,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\angular-material.css" />
+    <Content Include="Content\angular-material.layout-attributes.css" />
+    <Content Include="Content\angular-material.layout-attributes.min.css" />
+    <Content Include="Content\angular-material.layouts.css" />
+    <Content Include="Content\angular-material.layouts.ie_fixes.css" />
+    <Content Include="Content\angular-material.layouts.min.css" />
+    <Content Include="Content\angular-material.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
@@ -283,6 +290,9 @@
     <Content Include="Scripts\angular-csp.css" />
     <Content Include="Scripts\angular-loader.js" />
     <Content Include="Scripts\angular-loader.min.js" />
+    <Content Include="Scripts\angular-material-mocks.js" />
+    <Content Include="Scripts\angular-material.js" />
+    <Content Include="Scripts\angular-material.min.js" />
     <Content Include="Scripts\angular-message-format.js" />
     <Content Include="Scripts\angular-message-format.min.js" />
     <Content Include="Scripts\angular-messages.js" />
