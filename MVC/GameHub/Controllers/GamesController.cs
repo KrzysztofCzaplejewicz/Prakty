@@ -1,9 +1,11 @@
 ﻿using GameHub.Data;
 using GameHub.Models;
 using GameHub.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -29,16 +31,18 @@ namespace GameHub.Controllers
             var result = new List<GamesViewModel>();
             list.ForEach(x =>
                 {
-                    result.Add(new GamesViewModel()
+                    result.Add(item: new GamesViewModel()
                     {
                         Id = x.Id,
                         Host = x.Host,
                         Visitor = x.Visitor,
-                        Town = x.Town,
+                        Town = x.Teams.Town,
                         LeagueId = x.LeagueId,
                         TeamName= x.Teams.TeamName,
                         TeamName1= x.Teams1.TeamName,
-                        LeagueName = x.Leagues.LeagueName
+                        LeagueName = x.Leagues.LeagueName,
+                        Date = x.DateTime.Date.ToString(CultureInfo.CurrentCulture),
+                        Time = x.DateTime.ToString(CultureInfo.CurrentCulture)
                     });
                 });
             return result;
@@ -57,6 +61,10 @@ namespace GameHub.Controllers
                 viewModel.Host = game.Host;
                 viewModel.Visitor = game.Visitor;
                 viewModel.Town = game.Town;
+                viewModel.LeagueId = game.LeagueId;
+                viewModel.Date = game.DateTime.ToString(CultureInfo.CurrentCulture);
+                viewModel.Time = game.DateTime.ToString(CultureInfo.CurrentCulture);
+                
 
                 return viewModel;
             }
@@ -105,22 +113,65 @@ namespace GameHub.Controllers
 
         // POST: api/Games
         [ResponseType(typeof(Games))]
-        public IHttpActionResult PostGame(Games game)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //public IHttpActionResult PostGame(Games game)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            //game.LeagueId = 1;
-            //game.TeamId = 1;
+        //    //game.LeagueId = 1;
+        //    //game.TeamId = 1;
             
 
-            db.Games.Add(game);
-            db.SaveChanges();
+        //    db.Games.Add(game);
+        //    db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = game.Id }, game);
+        //    return CreatedAtRoute("DefaultApi", new { id = game.Id }, game);
+        //}
+
+           [HttpPost]
+        public HttpResponseMessage CreateGame(GamesViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Games viewModel = new Games()
+                    {
+                        Id = model.Id,
+                        Host = model.Host,
+                        Visitor = model.Visitor,
+                        Town = model.Town,
+                        LeagueId = model.LeagueId,
+                        DateTime = DateTime.Parse($"{model.Date} {model.Time}")
+                        
+                        
+                    };
+                    db.Games.Add(viewModel);
+                    var result = db.SaveChanges();
+                    if (result > 0)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, "Submitted Successfully");
+                    }
+                    else
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Something wrong !");
+                    }
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Something wrong !");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Something wrong !", ex);
+            }
         }
+
+
 
         // DELETE: api/Games/5
         [ResponseType(typeof(Games))]

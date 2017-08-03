@@ -27,8 +27,9 @@
     TeamControllers.controller('DeleteController',
         [
             '$scope', '$http', '$routeParams', '$location',
-            function ($scope, $http, $routeParams, $location)
-            {
+            function ($scope, $http, $routeParams, $location) {
+               
+
                 $scope.Id = $routeParams.id;
                 $http.get("/api/Teams/" + $routeParams.id).then(function(data) {
                     $scope.TeamName = data.data.TeamName;
@@ -45,6 +46,7 @@
                             $scope.error = "Wystąpił bład podczas usuwania Team!" + data;
                         });
                 };
+
                 
             }
         ]);
@@ -171,7 +173,9 @@
                             Host: $scope.Host,
                             Visitor: $scope.Visitor,
                             Town: $scope.Town,
-                            LeagueId: $scope.LeagueId
+                            LeagueId: $scope.LeagueId,
+                            Date: $scope.DateTime.navigateToString("d MM yyyy"),
+                            Time: $scope.DateTime.navigateToString("HH:mm")
                         };
                         if ($scope.Id === 0) {
                             $http.post("/api/Games/", obj).then(function() {
@@ -198,6 +202,8 @@
                             $scope.Town = data.data.Town;
                             $scope.LeagueId = data.data.LeagueId;
                             $scope.getVisitors();
+                            $scope.Date = data.data.Date;
+                            $scope.Time = data.data.Time;
 
                         });
                     } else {
@@ -294,6 +300,21 @@
                 } else {
                     $scope.title = "Create New Player";
                 }
+            }
+        ]);
+
+    TeamControllers.controller('PlayersViewsListController',
+        [
+            '$scope', '$http','$routeParams',
+            function ($scope, $http,$routeParams) {
+                $scope.Id = $routeParams.id;
+                $http.get("/api/PlayersViews/" + $routeParams.id).then(function(data) {
+
+                    $scope.Players = data.data;
+                });
+
+               
+               
             }
         ]);
 

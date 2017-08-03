@@ -11,6 +11,8 @@
     <div ng-show="error" class="alert alert-danger alert-dismissible" role="alert">{{error}}</div>
     <table   class = "table table-striped table-bordered" >
         <tr>
+            <th>Date</th>
+            <th>Time</th>
             <th>Host</th>
             <th>Visitor</th>
             <th>Town</th>
@@ -19,7 +21,9 @@
             <th>Delete</th>
         </tr>
 
-        <tr ng-repeat = "game in Games">
+        <tr ng-repeat = "game in Games" >
+            <td>{{game.Date}}</td>
+            <td>{{game.Time}}</td>
             <td>{{game.TeamName}}</td>
             <td>{{game.TeamName1}}</td>
             <td>{{game.Town}}</td>

@@ -45,6 +45,9 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Migrations\AddUrlTable.cs" />
+    <Compile Include="Migrations\CreateNewTables.cs" />
+    <Compile Include="Migrations\InsertValues.cs" />
+    <Compile Include="Migrations\InsertValuesPlayerTeamTable.cs" />
     <Compile Include="Migrations\UpdateGameTable.cs" />
     <Compile Include="Migrations\UpdateTables.cs" />
     <Compile Include="Migrations\_20170721123300_CreateGameTable.cs" />

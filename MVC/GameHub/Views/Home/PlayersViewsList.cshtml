@@ -1,0 +1,43 @@
+﻿@model GameHub.ViewModels.PlayersView
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<div>
+    <a href="#!/playersviewslist/1">Lowlanders</a>
+</div>
+
+<div>
+    <a href="#!/playersviewslist/2">LowlandersB</a>
+</div>
+
+<div>
+    <a href="#!/playersviewslist/3">Panters</a>
+</div>
+  
+<div ng-show="error" class="alert alert-danger alert-dismissible" role="alert">{{error}}</div>
+<table   class = "table table-striped table-bordered" >
+    <tr>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Age</th>
+        <th>Team</th>
+        <th>Seasons Played</th>
+        
+        
+
+    </tr>
+
+    <tr ng-repeat = "player in Players">
+        <td>{{player.FirstName}}</td>
+        <td>{{player.LastName}}</td>
+        <td>{{player.Age}}</td>
+        <td>{{player.TeamName}}</td>
+        <td>{{player.Count}}</td>
+      
+    </tr>
+</table>
+
+

@@ -19,6 +19,9 @@ namespace GameHub
                 .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             GlobalConfiguration.Configuration.Formatters
                 .Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
+
+            log4net.Config.XmlConfigurator.Configure();
+
         }
     }
 }

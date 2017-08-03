@@ -11,6 +11,12 @@
         public string TeamName { get; set; }
         public string TeamName1 { get; set; }
         public string LeagueName { get; set; }
-        
+
+        [FutureDate]
+        public string Date { get; set; }
+
+        [ValidTime]
+        public string Time { get; set; }
+
     }
 }

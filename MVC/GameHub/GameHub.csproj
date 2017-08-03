@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -233,9 +236,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaguesController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
+    <Compile Include="Controllers\PlayersViewsController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Data\Context.cs" />
+    <Compile Include="Data\Model1.cs" />
+    <Compile Include="Data\Model2.cs" />
     <Compile Include="Models\Games.cs" />
     <Compile Include="Models\Leagues.cs" />
     <Compile Include="Models\Players.cs" />
@@ -254,6 +260,7 @@
     <Compile Include="ViewModels\FutureDate.cs" />
     <Compile Include="ViewModels\GamesViewModel.cs" />
     <Compile Include="ViewModels\LeaguesViewModel.cs" />
+    <Compile Include="ViewModels\PlayersView.cs" />
     <Compile Include="ViewModels\PlayersViewModel.cs" />
     <Compile Include="ViewModels\TeamsViewModel.cs" />
   </ItemGroup>
@@ -269,12 +276,44 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="css\bootstrap-responsive.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\custom-styles.css" />
+    <Content Include="css\font-awesome-ie7.css" />
+    <Content Include="css\font-awesome.css" />
+    <Content Include="css\font-awesome.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fjallaone-regular-webfont.svg" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\opensans-bold-webfont.svg" />
+    <Content Include="fonts\opensans-light-webfont.svg" />
+    <Content Include="fonts\oxygen-regular-webfont.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\banner-image.png" />
+    <Content Include="img\Bell.jpg" />
+    <Content Include="img\Bell1.png" />
+    <Content Include="img\body-bg.jpg" />
+    <Content Include="img\glyphicons-halflings-white.png" />
+    <Content Include="img\glyphicons-halflings.png" />
+    <Content Include="img\h-shadow.png" />
+    <Content Include="img\img1.png" />
+    <Content Include="img\img2.png" />
+    <Content Include="img\img3.png" />
+    <Content Include="img\img4.png" />
+    <Content Include="img\img5.png" />
+    <Content Include="img\img6.png" />
+    <Content Include="img\img7.png" />
+    <Content Include="img\img8.png" />
+    <Content Include="img\img9.png" />
+    <Content Include="img\list-arrow.png" />
+    <Content Include="img\v-shadow.png" />
     <Content Include="js\app-games.js" />
     <Content Include="js\app.js" />
+    <Content Include="js\bootstrap.js" />
     <Content Include="js\EditController.js" />
+    <Content Include="js\jquery-1.9.1.js" />
+    <Content Include="js\modernizr-2.6.2-respond-1.1.0.min.js" />
     <Content Include="js\TeamApp.js" />
     <Content Include="js\controller.js" />
     <Content Include="js\directive.js" />
@@ -354,6 +393,23 @@
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="fonts\fjallaone-regular-webfont.eot" />
+    <Content Include="fonts\fjallaone-regular-webfont.ttf" />
+    <Content Include="fonts\fjallaone-regular-webfont.woff" />
+    <Content Include="fonts\opensans-bold-webfont.eot" />
+    <Content Include="fonts\opensans-bold-webfont.ttf" />
+    <Content Include="fonts\opensans-bold-webfont.woff" />
+    <Content Include="fonts\opensans-light-webfont.eot" />
+    <Content Include="fonts\opensans-light-webfont.ttf" />
+    <Content Include="fonts\opensans-light-webfont.woff" />
+    <Content Include="fonts\oxygen-regular-webfont.eot" />
+    <Content Include="fonts\oxygen-regular-webfont.ttf" />
+    <Content Include="fonts\oxygen-regular-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
@@ -1103,9 +1159,6 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Team\Delete.html" />
-    <Content Include="Team\Edit.html" />
-    <Content Include="Team\List.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1133,10 +1186,13 @@
     <Content Include="Views\Home\PlayerDelete.cshtml" />
     <Content Include="Views\Home\PlayerEdit.cshtml" />
     <Content Include="Views\Home\PlayerList.cshtml" />
+    <Content Include="Views\Home\PlayersViewsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\test1\" />
+    <Folder Include="NewFolder1\" />
+    <Folder Include="ViewModels\test\" />
     <Folder Include="Views\Player\" />
   </ItemGroup>
   <ItemGroup>

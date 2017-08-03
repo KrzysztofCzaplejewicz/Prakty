@@ -47,7 +47,7 @@ namespace GameHub.Controllers
         [ResponseType(typeof(PlayersViewModel))]
         public PlayersViewModel GetPlayer(int id)
         {
-            var player = db.Players.FirstOrDefault(x => x.Id == id);
+            var player = db.Players.SingleOrDefault(x => x.Id == id);
             if (player != null)
             {
                 PlayersViewModel viewModel = new PlayersViewModel
@@ -173,7 +173,10 @@ namespace GameHub.Controllers
             return Ok(player);
         }
 
-        protected override void Dispose(bool disposing)
+        
+       
+
+    protected override void Dispose(bool disposing)
         {
             if (disposing)
             {

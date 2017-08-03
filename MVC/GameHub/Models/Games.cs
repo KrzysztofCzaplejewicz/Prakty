@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace GameHub.Models
@@ -6,8 +7,8 @@ namespace GameHub.Models
     {
         public int Id { get; set; }
 
-        [StringLength(50)]
-        public string DateTime { get; set; }
+        
+        public DateTime DateTime { get; set; }
 
         [StringLength(50)]
         public string Town { get; set; }
@@ -23,5 +24,7 @@ namespace GameHub.Models
         public virtual Teams Teams { get; set; }
 
         public virtual Teams Teams1 { get; set; }
+
+      
     }
 }

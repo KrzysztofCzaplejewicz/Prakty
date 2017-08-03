@@ -4,7 +4,11 @@
     var TeamApp = angular.module("TeamApp", ["ngRoute", "TeamControllers" ]);
    TeamApp.config([
        "$routeProvider", "$locationProvider", function ($routeProvider) {
-            $routeProvider
+           $routeProvider
+               .when("/index",
+                   {
+                       templateUrl: "/home/index"
+                   })
                 .when("/list",
                     {
                         templateUrl: "/home/list",
@@ -19,7 +23,13 @@
                     {
                         templateUrl: "/home/playerlist",
                         controller: "PlayerListController"
-                    })
+               })
+
+               .when("/playersviewslist/:id",
+                   {
+                       templateUrl: "/home/playersviewslist",
+                       controller: "PlayersViewsListController"
+                   })
                 .when("/create",
                 {
                     templateUrl: "/home/edit",
@@ -66,12 +76,15 @@
                         controller: "PlayerDeleteController"
                     })
                 .otherwise({
-                redirectTo: "/list"
+                redirectTo: "/index"
             });
 
            
        }
+       
     ]);
+
+    
 
     //TeamApp.controller('AppCtrl',
     //    function($scope, $mdDialog) {
