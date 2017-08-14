@@ -5,13 +5,24 @@
 </h3>
 <hr />
 <div class="container" >
-    <form  class="form-horizontal" style="max-width: 500px;">
+    <form  class="form-horizontal" style="max-width: 900px;">
+        
+        <div class="form-group">
+            <label class="control-label col-xs-3">
+                Date and Time:
+            </label>
+            <div class="col-xs-9">
+                <p class="form-control-static">{{Date}} {{Time}}</p>
+            </div>
+        </div> 
+        
+        
         <div class="form-group">
             <label class="control-label col-xs-3">
                 Host:
             </label>
             <div class="col-xs-9">
-                <p class="form-control-static">{{Host}}</p>
+                <p class="form-control-static">{{TeamName}}</p>
             </div>
         </div> 
         
@@ -20,7 +31,7 @@
                 Visitor:
             </label>
             <div class="col-xs-9">
-                <p class="form-control-static">{{Visitor}}</p>
+                <p class="form-control-static">{{TeamName1}}</p>
             </div>
         </div>
        
@@ -38,7 +49,7 @@
                 League:
             </label>
             <div class="col-xs-9">
-                <p class="form-control-static">{{LeagueId}}</p>
+                <p class="form-control-static">{{LeagueName}}</p>
             </div>
         </div>
 

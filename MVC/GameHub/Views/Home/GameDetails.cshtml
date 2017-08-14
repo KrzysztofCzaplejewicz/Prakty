@@ -1,0 +1,108 @@
+﻿@model GameHub.ViewModels.GamesViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h3 >
+    <span >Game Details</span><span class="right">{{Date}}, {{Time}}</span>
+</h3> 
+
+
+<hr />
+<div class = "subtitle" width = "940px" height = "100px" >
+    <div class="TitleHost"><img ng-src="{{UrlIconVisitor}}" alt="" width="76" height="50" /> {{TeamName}}</div>
+    <div class = "ScoreHost" >{{ScoreHost}}</div>
+    <div class = "Quatrs" >
+        {{Quatr1Host}} : {{Quatr1Visitor}}<br/>
+        {{Quatr2Host}} : {{Quatr2Visitor}}<br/>
+        {{Quatr3Host}} : {{Quatr3Visitor}}<br/>
+        {{Quatr4Host}} : {{Quatr4Visitor}}<br/>
+        
+    </div>
+    <div class="ScoreVisitor">{{ScoreVisitor}}</div>
+    <div class="TitleVisitor">{{TeamName1}} <img ng-src="{{UrlIconHost}}" alt="" width="76" height="50" /></div> 
+</div>
+
+<hr />
+
+<a href="#!/gamelist" class="btn btn-info">Back to List</a>
+
+
+
+@*<div class="container"  >
+<form  class="form-horizontal" style="max-width: 900px;">
+<div class="form-group">
+    <label class="control-label col-xs-3">
+        Host:
+    </label>
+    <div class="col-xs-9">
+        <p class="form-control-static">{{TeamName}}</p>
+    </div>
+</div> 
+        
+<div class="form-group">
+    <label class="control-label col-xs-3">
+        Visitor:
+    </label>
+    <div class="col-xs-9">
+        <p class="form-control-static">{{TeamName1}}</p>
+    </div>
+</div>
+       
+<div class="form-group">
+    <label class="control-label col-xs-3">
+        Town:
+    </label>
+    <div class="col-xs-9">
+        <p class="form-control-static">{{Town}}</p>
+    </div>
+</div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-3">
+            League:
+        </label>
+        <div class="col-xs-9">
+            <p class="form-control-static">{{LeagueName}}</p>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label col-xs-3">
+            1st Quatr:
+        </label>
+        <div class="col-xs-9">
+            <p class="form-control-static">{{Quatr1Host}} : {{Quatr1Visitor}}</p>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label col-xs-3">
+           2nd Quatr:
+        </label>
+        <div class="col-xs-9">
+            <p class="form-control-static">{{Quatr2Host}} : {{Quatr2Visitor}}</p>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label col-xs-3">
+           3rd Quatr:
+        </label>
+        <div class="col-xs-9">
+            <p class="form-control-static">{{Quatr3Host}} : {{Quatr3Visitor}}</p>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label col-xs-3">
+            4th Quatr:
+        </label>
+        <div class="col-xs-9">
+            <p class="form-control-static">{{Quatr4Host}} : {{Quatr4Visitor}}</p>
+        </div>
+    </div>
+</form>
+
+    </div>*@

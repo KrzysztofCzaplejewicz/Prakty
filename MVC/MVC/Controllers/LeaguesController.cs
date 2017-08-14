@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using MVC.Data;
+using MVC.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using MVC.Data;
-using MVC.Models;
 
 namespace MVC.Controllers
 {
+    [Authorize]
     public class LeaguesController : Controller
     {
         private Context db = new Context();

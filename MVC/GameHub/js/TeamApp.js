@@ -1,14 +1,18 @@
 ﻿(function () {
     "use strict";
     
-    var TeamApp = angular.module("TeamApp", ["ngRoute", "TeamControllers" ]);
+    var TeamApp = angular.module("TeamApp", ["ngRoute", "TeamControllers", "mainCtrl"]);
    TeamApp.config([
        "$routeProvider", "$locationProvider", function ($routeProvider) {
            $routeProvider
+               .when("/home",
+               {
+                   templateUrl: "/home/teams"
+                   })
                .when("/index",
                    {
                        templateUrl: "/home/index"
-                   })
+               })
                 .when("/list",
                     {
                         templateUrl: "/home/list",
@@ -74,37 +78,47 @@
                     {
                         templateUrl: "/home/playerdelete",
                         controller: "PlayerDeleteController"
-                    })
+               })
+               .when("/gamedetails/:id",
+                   {
+                       templateUrl: "/home/gamedetails",
+                       controller: "GameDetailsController"
+               })
+               .when("/register",
+                   {
+                       templateUrl: "/account/register"
+               })
+               .when("/login",
+                   {
+                       templateUrl: "/account/login"
+                   })
                 .otherwise({
                 redirectTo: "/index"
             });
 
-           
+
+
        }
+
+
        
     ]);
 
+   // //var serviceBase = 'http://localhost:55056/';
+   //var serviceBase = 'http://localhost:55056/';
+   // TeamApp.constant('ngAuthSettings', {
+   //     apiServiceBaseUri: serviceBase,
+   //     clientId: 'ngAuthApp'
+   // });
+
+   // TeamApp.config(function ($httpProvider) {
+   //     $httpProvider.interceptors.push('authInterceptorService');
+   // });
+
+   // TeamApp.run(['authService', function (authService) {
+   //     authService.fillAuthData();
+   // }]);
     
 
-    //TeamApp.controller('AppCtrl',
-    //    function($scope, $mdDialog) {
-    //        $scope.status = ' ';
-    //        $scope.customFullscreen = false;
-    //        $scope.showAdvanced = function(ev) {
-    //            $mdDialog.show({
-    //                    controller: EditController,
-    //                    templateUrl: '/home/edit',
-    //                    parent: angular.element(document.body),
-    //                    targetEvent: ev,
-    //                    clickOutsideToClose: true,
-    //                    fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    //                })
-    //                .then(function(answer) {
-    //                        $scope.status = 'You said the information was "' + answer + '".';
-    //                    },
-    //                    function() {
-    //                        $scope.status = 'You cancelled the dialog.';
-    //                    });
-    //        };
-    //    });
+    
 })();

@@ -46,3 +46,83 @@ element.style {
     text-align: left;
 }
 
+.right {
+    float: right;
+    
+    font-size: 20px;
+    
+}
+
+
+.subtitle {
+    width: 940px;
+    height: 70px;
+    font-size: 30px;
+    line-height: normal;
+}
+
+.ScoreHost {
+    background: #f85c5e;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    width: 100px;
+    float: left;
+    font-size: 40px;
+    text-align: center;
+}
+
+.TitleHost {
+    margin: 5px;
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    width: 300px;
+    float: left;
+}
+
+.TitleVisitor {
+    margin: 5px;
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    text-align: right;
+    width: 300px;
+    float: left;
+}
+
+.ScoreVisitor {
+    width: 100px;
+    background: #f85c5e;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    float: left;
+    font-size: 40px;
+    text-align: center;
+}
+.Quatrs {
+    margin: 2px;
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    width: 80px;
+    font-size: 12px;
+    float: left;
+    text-align: center;
+}
+.chat {
+  
+    background: #ffffff
+}
+.chat-header {
+    background: #f85c5e
+}

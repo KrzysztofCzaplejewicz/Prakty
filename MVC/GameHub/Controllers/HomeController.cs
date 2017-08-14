@@ -94,5 +94,19 @@ namespace GameHub.Controllers
             return PartialView("PlayersViewsList");
         }
 
+        public ActionResult GameDetails()
+        {
+            return PartialView("GameDetails");
+        }
+
+        public ActionResult Login()
+        {
+            return PartialView("Login");
+        }
+
+        public ActionResult Signup()
+        {
+            return PartialView("Signup");
+        }
     }
 }

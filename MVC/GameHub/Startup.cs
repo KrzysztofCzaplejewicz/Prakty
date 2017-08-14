@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartup(typeof(GameHub.Startup))]
@@ -12,7 +9,11 @@ namespace GameHub
     {
         public void Configuration(IAppBuilder app)
         {
+           
+         //   app.map<PerfHub>("/echo");
+
             ConfigureAuth(app);
+            app.MapSignalR();
         }
     }
 }

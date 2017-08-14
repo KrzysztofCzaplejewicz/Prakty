@@ -11,20 +11,19 @@ namespace GameHub.Data
         public virtual DbSet<Leagues> Leagues { get; set; }
         public virtual DbSet<Players> Players { get; set; }
         public virtual DbSet<Teams> Teams { get; set; }
+        //public virtual DbSet<Scores> Scores { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Leagues>()
                 .HasMany(e => e.Games)
                 .WithRequired(e => e.Leagues)
-                .HasForeignKey(e => e.LeagueId)
-                .WillCascadeOnDelete(false);
+                .HasForeignKey(e => e.LeagueId);
 
             modelBuilder.Entity<Leagues>()
                 .HasMany(e => e.Teams)
                 .WithOptional(e => e.Leagues)
                 .HasForeignKey(e => e.LeagueId);
-
 
             modelBuilder.Entity<Teams>()
                 .HasMany(e => e.Games)
@@ -38,14 +37,12 @@ namespace GameHub.Data
                 .HasForeignKey(e => e.Visitor)
                 .WillCascadeOnDelete(false);
 
-
-
             modelBuilder.Entity<Teams>()
                 .HasMany(e => e.Players)
                 .WithRequired(e => e.Teams)
                 .HasForeignKey(e => e.TeamId);
 
-            
+
 
         }
     }

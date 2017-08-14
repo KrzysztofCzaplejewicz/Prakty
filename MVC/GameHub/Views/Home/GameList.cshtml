@@ -17,22 +17,29 @@
             <th>Visitor</th>
             <th>Town</th>
             <th>League</th>
+            <th>Score</th>
             <th>Edit</th>
             <th>Delete</th>
+            <th>Details</th>
         </tr>
 
         <tr ng-repeat = "game in Games" >
             <td>{{game.Date}}</td>
             <td>{{game.Time}}</td>
-            <td>{{game.TeamName}}</td>
-            <td>{{game.TeamName1}}</td>
-            <td>{{game.Town}}</td>
-            <td>{{game.LeagueName}}</td>
+            <td>{{game.Teams.TeamName}}</td>
+            <td>{{game.Teams1.TeamName}}</td>
+            <td>{{game.Teams.Town}}</td>
+            <td>{{game.Leagues.LeagueName}}</td>
+            <td>{{game.ScoreHost}}:{{game.ScoreVisitor}}</td>
             <td>
                 <a href = "#!/gameedit/{{game.Id}}" class = "glyphicon glyphicon-edit" ></a>
             </td>
             <td>
                 <a href = "#!/gamedelete/{{game.Id}}" class = "glyphicon glyphicon-trash" ></a>
+            </td>
+            
+            <td>
+                <a href="#!/gamedetails/{{game.Id}}" class="glyphicon glyphicon-eye-open"></a>
             </td>
         </tr>
     </table>

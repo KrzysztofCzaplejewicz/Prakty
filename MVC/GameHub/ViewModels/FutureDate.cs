@@ -10,11 +10,11 @@ namespace GameHub.ViewModels
         {
             DateTime dateTime;
             var isValid = DateTime.TryParseExact(Convert.ToString(value),
-                "dd MM yyyy",
+                "dd/MM/yyyy",
                 CultureInfo.CurrentCulture,
                 DateTimeStyles.None,
                 out dateTime);
-            return (isValid && dateTime > DateTime.Now);
+            return (isValid /*&& dateTime > DateTime.Now*/);
         }
     }
     public class ValidTime : ValidationAttribute

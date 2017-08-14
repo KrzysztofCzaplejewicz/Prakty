@@ -5,7 +5,19 @@
 <form role="form" style="max-width: 500px;">
     <strong class="error">{{error}}</strong>
     
-    
+    <div class="form-group">
+        <label for="Date">
+            Date:
+        </label>
+        <input type="text" class="form-control" id="Date" ng-model="Date" />
+    </div>
+
+    <div class="form-group">
+        <label for="Time">
+           Time:
+        </label>
+        <input type="text" class="form-control" id="Time" ng-model="Time" />
+    </div>
     
     <div class="form-group">
         <label for="Host">
@@ -25,16 +37,8 @@
         </select>
     </div>
 
+   
     <div class="form-group">
-        <label for="Town">
-            Town:
-        </label>
-        <select class="form-control" id="Town" ng-model="Town" ng-options="t.Id as t.Town for t in TeamId">
-            <option value="">-- Select Town--</option>
-        </select>
-    </div>
-    
-   <div class="form-group">
         <label for="LeagueId">
             League:
         </label>
@@ -42,6 +46,78 @@
             <option value="">-- Select League--</option>
         </select>
     </div>
+    
+    <div class="form-group">
+        <label for="ScoreHost">
+            Score Host:
+        </label>
+        <input type="text" class="form-control" id="ScoreHost" ng-model="ScoreHost" />
+    </div>
+    
+    
+    <div class="form-group">
+        <label for="ScoreVisitor">
+            Score Visitor:
+        </label>
+        <input type="text" class="form-control" id="ScoreVisitor" ng-model="ScoreVisitor" />
+    </div>
+    
+    <div class="form-group">
+        <label for="Quatr1Host">
+            1st Quatr Host:
+        </label>
+        <input type="text" class="form-control" id="Quatr1Host" ng-model="Quatr1Host" />
+    </div>
+    
+    <div class="form-group">
+        <label for="Quatr2Host">
+            2nd Quatr Host:
+        </label>
+        <input type="text" class="form-control" id="Quatr2Host" ng-model="Quatr2Host" />
+    </div>
+    
+    <div class="form-group">
+        <label for="Quatr3Host">
+            3rd Quatr Host:
+        </label>
+        <input type="text" class="form-control" id="Quatr3Host" ng-model="Quatr3Host" />
+    </div>
+    
+    <div class="form-group">
+        <label for="Quatr4Host">
+            4th Quatr Host:
+        </label>
+        <input type="text" class="form-control" id="Quatr4Host" ng-model="Quatr4Host" />
+    </div>
+    
+    <div class="form-group">
+        <label for="Quatr1Visitor">
+            1st Quatr Visitor:
+        </label>
+        <input type="text" class="form-control" id="Quatr1Visitor" ng-model="Quatr1Visitor" />
+    </div>
+    
+    <div class="form-group">
+        <label for="Quatr2Visitor">
+            2nd Quatr Visitor:
+        </label>
+        <input type="text" class="form-control" id="Quatr2Visitor" ng-model="Quatr2Visitor" />
+    </div>
+    
+    <div class="form-group">
+        <label for="Quatr3Visitor">
+            3rd Quatr Visitor:
+        </label>
+        <input type="text" class="form-control" id="Quatr3Visitor" ng-model="Quatr3Visitor" />
+    </div>
+    
+    <div class="form-group">
+        <label for="Quatr4Visitor">
+           4th Quatr Visitor:
+        </label>
+        <input type="text" class="form-control" id="Quatr4Visitor" ng-model="Quatr4Visitor" />
+    </div>
+
     <a href="#!/gamelist" class="btn btn-info">Back to List</a>
     <button type="submit" class="btn btn-default" ng-click="saveGame()">Submit</button>
 </form>

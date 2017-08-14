@@ -1,16 +1,17 @@
-﻿using GameHub.Data;
+﻿using AutoMapper;
+using GameHub.Data;
 using GameHub.Models;
 using GameHub.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Mvc;
 
 namespace GameHub.Controllers
 {
@@ -19,51 +20,95 @@ namespace GameHub.Controllers
         private Context db = new Context();
 
         // GET: api/Games
-        [ActionName("get"), HttpGet]
+        [System.Web.Mvc.Authorize(Users = "czaplej@czaplej.com")]
+        [System.Web.Http.ActionName("get")]
+        [System.Web.Http.HttpGet]
         public IEnumerable<GamesViewModel> GetGames()
         {
             var query = db.Games
                 .Include(x=> x.Teams1)
                 .Include(x=>x.Teams)
                 .Include(x=>x.Leagues)
+               
                 .AsQueryable();
             var list = query.ToList();
-            var result = new List<GamesViewModel>();
-            list.ForEach(x =>
-                {
-                    result.Add(item: new GamesViewModel()
-                    {
-                        Id = x.Id,
-                        Host = x.Host,
-                        Visitor = x.Visitor,
-                        Town = x.Teams.Town,
-                        LeagueId = x.LeagueId,
-                        TeamName= x.Teams.TeamName,
-                        TeamName1= x.Teams1.TeamName,
-                        LeagueName = x.Leagues.LeagueName,
-                        Date = x.DateTime.Date.ToString(CultureInfo.CurrentCulture),
-                        Time = x.DateTime.ToString(CultureInfo.CurrentCulture)
-                    });
-                });
-            return result;
+
+             return list.Select(Mapper.Map<Games, GamesViewModel>);
+
+        //    var result = new List<GamesViewModel>();
+
+        //    list.ForEach(x =>
+        //    {
+        //        var game = new GamesViewModel();
+                
+        //        game.Id = x.Id;
+        //        game.Host = x.Host;
+        //        game.Visitor = x.Visitor;
+        //        game.Town = x.Teams.Town;
+        //        game.LeagueId = x.LeagueId;
+        //        game.TeamName = x.Teams.TeamName;
+        //        game.TeamName1 = x.Teams1.TeamName;
+        //        game.LeagueName = x.Leagues.LeagueName;
+        //        game.Date = x.DateTime.ToString("dd/MM/yyyy");
+        //        game.Time = x.DateTime.ToString("HH:mm");
+        //        game.ScoreHost = x.ScoreHost;
+        //        game.ScoreVisitor = x.ScoreVisitor;
+        //        game.Quatr1Host = x.Quatr1Host;
+        //        game.Quatr2Host = x.Quatr2Host;
+        //        game.Quatr3Host = x.Quatr3Host;
+        //        game.Quatr4Host = x.Quatr4Host;
+        //        game.Quatr1Visitor = x.Quatr1Visitor;
+        //        game.Quatr2Visitor = x.Quatr2Visitor;
+        //        game.Quatr3Visitor = x.Quatr3Visitor;
+        //        game.Quatr4Visitor = x.Quatr4Visitor;
+                
+        //        result.Add(game);
+        //});
+
+          
+        //    return result;
         }
 
         // GET: api/Games/5
-        [HttpGet]
+        [System.Web.Http.HttpGet]
         [ResponseType(typeof(GamesViewModel))]
         public GamesViewModel GetGames(int id)
         {
             var game = db.Games.FirstOrDefault(x => x.Id == id);
             if (game != null)
             {
+               //var view = Mapper.Map<GamesViewModel>(game);
+                //return view;
                 GamesViewModel viewModel = new GamesViewModel();
+            
                 viewModel.Id = game.Id;
+
                 viewModel.Host = game.Host;
                 viewModel.Visitor = game.Visitor;
-                viewModel.Town = game.Town;
+                viewModel.TeamName = game.Teams.TeamName;
+                viewModel.TeamName1 = game.Teams1.TeamName;
+                viewModel.Town = game.Teams.Town;
+
                 viewModel.LeagueId = game.LeagueId;
-                viewModel.Date = game.DateTime.ToString(CultureInfo.CurrentCulture);
-                viewModel.Time = game.DateTime.ToString(CultureInfo.CurrentCulture);
+                viewModel.LeagueName = game.Leagues.LeagueName;
+
+                viewModel.Date = game.DateTime.ToString("dd/MM/yyyy");
+                viewModel.Time = game.DateTime.ToString("HH:mm");
+
+                viewModel.ScoreHost = game.ScoreHost;
+                viewModel.ScoreVisitor = game.ScoreVisitor;
+
+                viewModel.Quatr1Host = game.Quatr1Host;
+                viewModel.Quatr2Host = game.Quatr2Host;
+                viewModel.Quatr3Host = game.Quatr3Host;
+                viewModel.Quatr4Host = game.Quatr4Host;
+                viewModel.Quatr1Visitor = game.Quatr1Visitor;
+                viewModel.Quatr2Visitor = game.Quatr2Visitor;
+                viewModel.Quatr3Visitor = game.Quatr3Visitor;
+                viewModel.Quatr4Visitor = game.Quatr4Visitor;
+                viewModel.UrlIconHost = game.Teams1.UrlIcon;
+                viewModel.UrlIconVisitor = game.Teams.UrlIcon;
+
                 
 
                 return viewModel;
@@ -113,42 +158,39 @@ namespace GameHub.Controllers
 
         // POST: api/Games
         [ResponseType(typeof(Games))]
-        //public IHttpActionResult PostGame(Games game)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    //game.LeagueId = 1;
-        //    //game.TeamId = 1;
-            
-
-        //    db.Games.Add(game);
-        //    db.SaveChanges();
-
-        //    return CreatedAtRoute("DefaultApi", new { id = game.Id }, game);
-        //}
-
-           [HttpPost]
+       [System.Web.Http.HttpPost]
+       [ValidateAntiForgeryToken]
         public HttpResponseMessage CreateGame(GamesViewModel model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+
+                   // var galgan =   Mapper.Map<Games>(model);
+
+
                     Games viewModel = new Games()
                     {
                         Id = model.Id,
+                        DateTime = DateTime.Parse($"{model.Date} {model.Time}"),
                         Host = model.Host,
                         Visitor = model.Visitor,
-                        Town = model.Town,
-                        LeagueId = model.LeagueId,
-                        DateTime = DateTime.Parse($"{model.Date} {model.Time}")
-                        
+                        ScoreHost = model.ScoreHost,
+                        ScoreVisitor = model.ScoreVisitor,
+                        Quatr1Host = model.Quatr1Host,
+                        Quatr2Host = model.Quatr2Host,
+                        Quatr3Host = model.Quatr3Host,
+                        Quatr4Host = model.Quatr4Host,
+                        Quatr1Visitor = model.Quatr1Visitor,
+                        Quatr2Visitor = model.Quatr2Visitor,
+                        Quatr3Visitor = model.Quatr3Visitor,
+                        Quatr4Visitor = model.Quatr4Visitor,
+                        LeagueId = model.LeagueId
                         
                     };
                     db.Games.Add(viewModel);
+                   // db.Configuration.ValidateOnSaveEnabled = false;
                     var result = db.SaveChanges();
                     if (result > 0)
                     {

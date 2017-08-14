@@ -1,4 +1,5 @@
-﻿using GameHub.Data;
+﻿using AutoMapper;
+using GameHub.Data;
 using GameHub.Models;
 using GameHub.ViewModels;
 using System;
@@ -23,6 +24,7 @@ namespace GameHub.Controllers
             var query = db.Teams.Include(x => x.Leagues).AsQueryable();
             var list = query.ToList();
 
+            return list.Select(Mapper.Map<Teams, TeamsViewModel>);
             var result = new List<TeamsViewModel>();
 
             list.ForEach(x =>
@@ -34,7 +36,7 @@ namespace GameHub.Controllers
                     Id = x.Id,
                     UrlIcon = x.UrlIcon,
                     LeagueId = x.LeagueId,
-                    LeagueName = x.Leagues.LeagueName
+                   // LeagueName = x.Leagues.LeagueName
                 });
             });
 
@@ -56,6 +58,7 @@ namespace GameHub.Controllers
                 viewModel.Town = team.Town;
                 viewModel.LeagueId = team.LeagueId;
                 viewModel.UrlIcon = team.UrlIcon;
+                viewModel.LeagueName = team.Leagues.LeagueName;
 
 
                 return viewModel;

@@ -1,4 +1,4 @@
-﻿using GameHub.Data;
+﻿using AutoMapper;
 using GameHub.Models;
 using GameHub.ViewModels;
 using System.Collections.Generic;
@@ -9,9 +9,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Context = GameHub.Data.Context;
 
 namespace GameHub.Controllers
 {
+    [Authorize()]
     public class PlayersController : ApiController
     {
         private Context db = new Context();
@@ -22,6 +24,8 @@ namespace GameHub.Controllers
         {
             var query = db.Players.Include(x=> x.Teams).AsQueryable();
             var list = query.ToList();
+            return list.Select(Mapper.Map<Players, PlayersViewModel>);
+
 
             var result = new List<PlayersViewModel>();
 
@@ -33,8 +37,8 @@ namespace GameHub.Controllers
                     LastName = x.LastName,
                     Age = x.Age,
                     Id = x.Id,
-                    TeamId = x.TeamId,
-                    TeamName = x.Teams.TeamName
+                   // TeamId = x.TeamId,
+                   // TeamName = x.Teams.TeamName
                 });
             });
 
@@ -48,15 +52,19 @@ namespace GameHub.Controllers
         public PlayersViewModel GetPlayer(int id)
         {
             var player = db.Players.SingleOrDefault(x => x.Id == id);
+            
             if (player != null)
             {
+                
                 PlayersViewModel viewModel = new PlayersViewModel
                 {
                     Id = player.Id,
                     FirstName = player.FirstName,
                     LastName = player.LastName,
                     Age = player.Age,
-                    TeamId = player.TeamId
+                    //TeamId = player.TeamId,
+                    
+                    
                 };
 
                 return viewModel;
