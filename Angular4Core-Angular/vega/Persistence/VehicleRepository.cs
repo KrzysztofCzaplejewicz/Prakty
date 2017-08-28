@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using vega.Models;
@@ -25,10 +26,15 @@ namespace vega.Persistence
                 .SingleOrDefaultAsync(v => v.Id == id);
         }
 
-        // public async Task<Vehicle> GetVehicleWithMake(int id)
-        // {
-            
-        // }
+         public async Task<IEnumerable<Vehicle>> GetVehicles()
+         {
+            return await context.Vehicles
+            .Include(v => v.Model)
+                .ThenInclude(m => m.Make)
+            .Include(v => v.Features)
+                .ThenInclude(vf => vf.Feature)
+            .ToListAsync();
+         }
 
 
         public void Add(Vehicle vehicle)
@@ -40,5 +46,7 @@ namespace vega.Persistence
         {
             context.Remove(vehicle);
         }
+
+    
     }
 }

@@ -1,0 +1,36 @@
+<h1>Vehicles</h1>
+<button class="btn btn-primary"><a class="as" [routerLink]="['/vehicles/new']">New Vehicle</a></button>
+<div class="well">
+    <div class="form-group">
+        <label for="make">Make</label>
+        <select id="make" class="form-control" [(ngModel)]="filter.makeId" (change)="onFilterChange()">
+            <option value=""></option>
+            <option *ngFor="let m of makes"  value="{{ m.id }}">{{ m.name }}</option>
+        </select>
+    </div>
+    <button class="btn btn-default" (click)="resetFilter()">Reset</button>
+</div>
+
+
+<p *ngIf="!vehicles"><em>Loading...</em></p>
+
+<table class='table' *ngIf="vehicles">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Make</th>
+            <th>Model</th>        
+            <th>Contact Name</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let v of vehicles">
+            <td>{{ v.id }}</td>
+            <td>{{ v.model.name }}</td>
+            <td>{{ v.make.name }}</td>            
+            <td>{{ v.contact.name }}</td>
+            <td><a [routerLink]="['/vehicles/', v.id]">View</a></td>
+        </tr>
+    </tbody>
+</table>
