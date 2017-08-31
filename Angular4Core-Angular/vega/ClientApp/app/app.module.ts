@@ -1,3 +1,4 @@
+import { PaginationComponent } from './components/shared/pagination.component';
 import { VehicleListComponent } from './components/vehicle-list/vehicle-list.component';
 import * as Raven from 'raven-js';
 import { Http,HttpModule } from '@angular/http';
@@ -27,7 +28,8 @@ export const sharedConfig: NgModule = {
         FetchDataComponent,
         HomeComponent,
         VehicleFormComponent,
-        VehicleListComponent
+        VehicleListComponent,
+        PaginationComponent
     ],
     imports: [     HttpModule,    
         FormsModule,
