@@ -80,8 +80,8 @@ namespace Core.Controllers
             if (team == null)
             return NotFound();
 
-            var teamResource = mapper.Map<Team, TeamResource>(team);
-            return Ok(teamResource);
+            var result = mapper.Map<Team, TeamResource>(team);
+            return Ok(result);
         }
 
        [HttpGet]

@@ -17,6 +17,8 @@ namespace Core.Mapping
                 .ForMember(x=> x.Id, opt=> opt.Ignore());
             CreateMap<SaveTeamResource, Team>()
                 .ForMember(x=> x.Id, opt=> opt.Ignore());
+            CreateMap<SavePlayerResource, Player>()
+                .ForMember(x => x.Id, opt => opt.Ignore());
         }
     }
 }
