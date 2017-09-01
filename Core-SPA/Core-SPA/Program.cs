@@ -2,7 +2,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 
-namespace Core_SPA
+namespace Core
 {
     public class Program
     {
