@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Core.Controllers.Resources;
-using Core.Models;
+using Core.Core.Models;
 
 namespace Core.Mapping
 {

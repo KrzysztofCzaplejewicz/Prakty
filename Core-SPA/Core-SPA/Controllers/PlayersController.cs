@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Core.Controllers.Resources;
-using Core.Models;
+using Core.Core.Models;
 using Core.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -85,5 +85,6 @@ namespace Core.Controllers
             return mapper.Map<List<Player>, List<PlayerResource>>(players);
            
         }
+        
     }
 }

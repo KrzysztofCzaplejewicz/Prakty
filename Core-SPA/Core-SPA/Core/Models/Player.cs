@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Core.Models
+namespace Core.Core.Models
 {
     public class Player
     {

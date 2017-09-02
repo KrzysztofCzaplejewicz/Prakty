@@ -1,4 +1,5 @@
 using AutoMapper;
+using Core.Core;
 using Core.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,6 +25,10 @@ namespace Core
             services.AddAutoMapper();
 
 ;           services.AddDbContext<CoreDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+
+            services.AddScoped<ITeamRepository, TeamRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddMvc();
         }

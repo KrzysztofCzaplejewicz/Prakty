@@ -1,6 +1,6 @@
 ﻿using Core.Persistence;
 
-namespace Core.Models
+namespace Core.Core.Models
 {
     public class TeamQuery : IQueryObject
     {

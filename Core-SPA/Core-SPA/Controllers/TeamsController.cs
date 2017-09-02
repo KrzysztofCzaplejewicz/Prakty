@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using Core.Controllers.Resources;
-using Core.Models;
-using Core.Persistence;
+using Core.Core;
+using Core.Core.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Core.Controllers
@@ -14,13 +12,15 @@ namespace Core.Controllers
     [Route("api/Teams")]
     public class TeamsController : Controller
     {
-        private readonly CoreDbContext context;
         private readonly IMapper mapper;
+        private readonly ITeamRepository repository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public TeamsController(CoreDbContext context, IMapper mapper )
+        public TeamsController(IMapper mapper, ITeamRepository repository, IUnitOfWork unitOfWork )
         {
-            this.context = context;
             this.mapper = mapper;
+            this.repository = repository;
+            this.unitOfWork = unitOfWork;
         }
 
         [HttpPost]
@@ -31,8 +31,9 @@ namespace Core.Controllers
 
             var team = mapper.Map<SaveTeamResource, Team>(teamResource);
 
-            context.Teams.Add(team);
-            await context.SaveChangesAsync();
+            repository.Add(team);
+            
+            await unitOfWork.CompleteAsync();
 
             var result = mapper.Map<Team, TeamResource>(team);
             return Ok(result);
@@ -44,7 +45,7 @@ namespace Core.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var team = await context.Teams.FindAsync(id);
+            var team = await repository.GetTeam(id);
 
             if (team == null)
                 return NotFound();
@@ -52,8 +53,8 @@ namespace Core.Controllers
 
             mapper.Map<SaveTeamResource, Team>(teamResource, team);
 
-            
-            await context.SaveChangesAsync();
+
+            await unitOfWork.CompleteAsync();
 
 
             var result = mapper.Map<Team, TeamResource>(team);
@@ -63,11 +64,11 @@ namespace Core.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTeam(int id)
         {
-            var team = await context.Teams.FindAsync(id);
+            var team = await repository.GetTeam(id);
             if (team == null)
                 return NotFound();
-            context.Teams.Remove(team);
-            await context.SaveChangesAsync();
+            repository.Remove(team);
+            await unitOfWork.CompleteAsync();
 
             return Ok(id);
         }
@@ -75,7 +76,7 @@ namespace Core.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTeam(int id)
         {
-            var team = await context.Teams.Include(x=>x.Players).SingleOrDefaultAsync(x => x.Id == id);
+            var team = await repository.GetTeam(id);
 
             if (team == null)
             return NotFound();
@@ -87,11 +88,10 @@ namespace Core.Controllers
        [HttpGet]
        public async Task<IEnumerable<TeamResource>> GetTeams(TeamQueryResource teamResource )
        {
-           var resource = mapper.Map<TeamQueryResource, TeamQuery>(teamResource);
-           var teams = context.Teams.Include(x=> x.Players).AsQueryable();
-           var sru = await teams.ToListAsync();
+           
+            var teams = await repository.GetTeams(teamResource);
 
-          return mapper.Map<IEnumerable<Team>, IEnumerable<TeamResource>>(sru);
+          return mapper.Map<IEnumerable<Team>, IEnumerable<TeamResource>>(teams);
        
        }
     }
