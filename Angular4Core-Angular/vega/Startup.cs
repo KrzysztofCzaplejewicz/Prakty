@@ -39,6 +39,7 @@ namespace WebApplicationBasic
 
             services.AddDbContext<VegaDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
             // Add framework services.
+                
             services.AddMvc();
         }
 
@@ -61,6 +62,13 @@ namespace WebApplicationBasic
             }
 
             app.UseStaticFiles();
+
+            var options = new JwtBearerOptions
+                 {
+                Audience = "https://api.core.com",
+                Authority = "https://core123.eu.auth0.com/"
+                };
+            app.UseJwtBearerAuthentication(options);
 
             app.UseMvc(routes =>
             {

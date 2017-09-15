@@ -1,9 +1,8 @@
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using vega.Controllers.Resources;
 using vega.Models;
 using vega.Persistence;
@@ -13,21 +12,23 @@ namespace vega.Controllers
     [Route("/api/vehicles")]
     public class VehiclesController : Controller
     {
-        private readonly IMapper mapper;        
+        private readonly IMapper mapper;
         private readonly IVehicleRepository repository;
         private readonly IUnitOfWork unitOfWork;
+
+
 
         public VehiclesController(IMapper mapper, IVehicleRepository repository, IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
             this.repository = repository;
             this.mapper = mapper;
-            
+
         }
         [HttpPost]
         public async Task<IActionResult> CreateVehicle([FromBody] SaveVehicleResource vehicleResource)
         {
-            
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -95,7 +96,7 @@ namespace vega.Controllers
             return Ok(vehicleResource);
         }
         [HttpGet]
-        public async Task<IEnumerable<VehicleResource>> GetVehicles(VehicleQueryResource filterResource) 
+        public async Task<IEnumerable<VehicleResource>> GetVehicles(VehicleQueryResource filterResource)
         {
             var filter = Mapper.Map<VehicleQueryResource, VehicleQuery>(filterResource);
             var vehicles = await repository.GetVehicles(filter);
